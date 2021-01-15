@@ -47,6 +47,7 @@ def polish(filename, w, h, hash="", viewhash=""):
         img = Image.open(filename)
         img = img.convert("RGBA")
 
+        print("  Polishing...A")
         pixdata = img.load()
 
         # Read top left pixel color - not robust to zoomed in images
@@ -58,12 +59,14 @@ def polish(filename, w, h, hash="", viewhash=""):
         y1 = img.size[1]
         y2 = 0
 
+        print("  Polishing...B")
         # Set background to white and transparent
 
-        for y in xrange(img.size[1]):
+        for y in range(img.size[1]):
             solidx = 0
             solidy = 0
-            for x in xrange(img.size[0]):
+            print("  Polishing...B1")
+            for x in range(img.size[0]):
                 if pixdata[x, y] == bkc:
                     pixdata[x, y] = (255, 255, 255, 0 if PolishTransparentBackground else 255)
                 else:
@@ -73,11 +76,13 @@ def polish(filename, w, h, hash="", viewhash=""):
                         y1 = y
                     solidx = x
                     solidy = y
+            print("  Polishing...B2")
             if solidx > x2:
                 x2 = solidx
             if solidy > y2:
                 y2 = solidy
 
+        print("  Polishing...C")
         x2 += 2
         y2 += 2
 
@@ -91,15 +96,18 @@ def polish(filename, w, h, hash="", viewhash=""):
         # add hash to meta data
         meta = PngImagePlugin.PngInfo()
 
+        print("  Polishing...D")
         # copy metadata into new object
         #for k,v in im.info.iteritems():
         #    if k in reserved: continue
         meta.add_text("csghash", hash, 0)
         meta.add_text("viewhash", viewhash, 0)
 
+        print("  Polishing...E")
         # Save it
         img.save(filename, "PNG", pnginfo=meta)
         img.close()
+        print("  Polishing...F")
     except:
         print("  Exception error", sys.exc_info()[0])
 
