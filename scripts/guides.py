@@ -347,7 +347,7 @@ def gen_printing_guide(m, guide_template):
 
 
 def load_sources():
-    print "Loading sourcing info..."
+    print("Loading sourcing info...")
 
     load_source(config.paths['sourcingcsv'])
 

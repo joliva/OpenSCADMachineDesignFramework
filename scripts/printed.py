@@ -111,16 +111,16 @@ def printed():
         f.write(json.dumps(jso, sort_keys=False, indent=4, separators=(',', ': ')))
 
     # clean-up orphaned stls and checksums
-    print "Checking for outdated STLs..."
+    print("Checking for outdated STLs...")
     for f in os.listdir(config.paths['printedpartsstl']):
         fp = os.path.join(config.paths['printedpartsstl'], f)
         try:
             if os.path.isfile(fp) and (fp not in stlList):
-                print "Removing: "+fp
+                print("Removing: "+fp)
                 os.remove(fp)
         except Exception, e:
-            print e
-    print "  Done"
+            print(e)
+    print("  Done")
 
     return 0
 
