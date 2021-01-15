@@ -118,7 +118,7 @@ def printed():
             if os.path.isfile(fp) and (fp not in stlList):
                 print("Removing: "+fp)
                 os.remove(fp)
-        except Exception, e:
+        except (Exception, e):
             print(e)
     print("  Done")
 
