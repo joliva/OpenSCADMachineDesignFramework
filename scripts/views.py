@@ -112,7 +112,7 @@ def render_view_using_file(obj_title, scadfile, dir, view, hashchanged, hash="")
     oldhashes = read_hashes_from_png(png_name)
 
     viewstr = str(view['size']) + str(view['translate']) + str(view['rotate']) + str(view['dist'])
-    viewhash = hashlib.md5(viewstr).hexdigest();
+    viewhash = hashlib.md5(viewstr.encode('utf-8')).hexdigest();
 
     if (not os.path.isfile(png_name) or (hash != oldhashes['csghash']) or (viewhash != oldhashes['viewhash'])):
         print("        Updating: "+png_name)
