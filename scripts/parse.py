@@ -164,7 +164,7 @@ def add_file(fn, fs):
         fs.append({ 'type':'file', 'file':fn })
 
 def add_file_for(jso, fs):
-    if type(jso) is DictType:
+    if isinstance(jso, dict):
         if 'file' in jso:
             add_file(jso['file'], fs)
 
@@ -203,7 +203,7 @@ def add_view(jso, o):
 def add_views_for(jso, o):
     # check for views in children
     for c in jso['children']:
-        if type(c) is DictType and c['type'] == 'view':
+        if isinstance(c, dict) and c['type'] == 'view':
             add_view(c, o)
 
 def add_animation(jso, o):
@@ -219,7 +219,7 @@ def add_animation(jso, o):
 def add_animations_for(jso, o):
     # check for animations in children
     for c in jso['children']:
-        if type(c) is DictType and c['type'] == 'animation':
+        if isinstance(c, dict) and c['type'] == 'animation':
             add_animation(c, o)
 
 def add_markdown(jso, o):
@@ -237,7 +237,7 @@ def add_markdown(jso, o):
 def add_markdown_for(jso, o):
     # check for markdown in children
     for c in jso['children']:
-        if type(c) is DictType and c['type'] == 'markdown':
+        if isinstance(c, dict) and c['type'] == 'markdown':
             add_markdown(c, o)
 
 def add_part(jso, o):
@@ -253,7 +253,7 @@ def add_part(jso, o):
 def add_parts_for(jso, o):
     # check for parts in children
     for c in jso['children']:
-        if type(c) is DictType and c['type'] == 'part':
+        if isinstance(c, dict) and c['type'] == 'part':
             add_part(c, o)
 
 
@@ -274,7 +274,7 @@ def add_step(jso, o):
 def add_steps_for(jso, o):
     # check for steps in children
     for c in jso['children']:
-        if type(c) is DictType and c['type'] == 'step':
+        if isinstance(c, dict) and c['type'] == 'step':
             add_step(c, o)
 
 
@@ -348,7 +348,7 @@ def add_cut(jso, cl, addSteps=True, addViews=True, addChildren=True):
     # Collate immediate children, and sub-assemblies nested in steps!
     if addChildren and 'children' in jso:
         for c in jso['children']:
-            if type(c) is DictType:
+            if isinstance(c, dict):
                 tn = c['type']
 
                 if tn == 'vitamin':
@@ -356,7 +356,7 @@ def add_cut(jso, cl, addSteps=True, addViews=True, addChildren=True):
 
                 if tn == 'step':
                     for sc in c['children']:
-                        if type(sc) is DictType:
+                        if isinstance(sc, dict):
                             tn2 = sc['type']
 
                             if tn2 == 'vitamin':
@@ -400,7 +400,7 @@ def add_assembly(jso, al, pl, vl, cl, addSteps=True, addViews=True, addChildren=
     nextlevel = level + 1
     if addChildren and 'children' in jso:
         for c in jso['children']:
-            if type(c) is DictType:
+            if isinstance(c, dict):
                 tn = c['type']
 
                 if tn == 'vitamin':
@@ -417,7 +417,7 @@ def add_assembly(jso, al, pl, vl, cl, addSteps=True, addViews=True, addChildren=
 
                 if tn == 'step':
                     for sc in c['children']:
-                        if type(sc) is DictType:
+                        if isinstance(sc, dict):
                             tn2 = sc['type']
 
                             if tn2 == 'vitamin':
@@ -437,7 +437,7 @@ def add_assembly(jso, al, pl, vl, cl, addSteps=True, addViews=True, addChildren=
 
 def summarise_parts_for(jso, al, pl, vl, cl, level=0):
     # print("sum_parts_for "+str(level))
-    if type(jso) is DictType:
+    if isinstance(jso, dict):
         tn = jso['type']
 
         if tn == 'vitamin':
@@ -460,7 +460,7 @@ def summarise_parts(jso, oldjso):
     print("Summarising parts for each machine...")
 
     for m in jso:
-        if type(m) is DictType and m['type'] == 'machine':
+        if isinstance(m, dict) and m['type'] == 'machine':
             print("  "+m['title']+"...")
 
             al = m['assemblies'] = []
@@ -487,13 +487,13 @@ def update_cache_info_for(vl, ovl):
         return
 
     for v in vl:
-        if type(v) is DictType and 'title' in v:
+        if isinstance(v, dict) and 'title' in v:
             print("      "+v['title'])
 
             # find match in ovl
             oldv = None
             for ov in ovl:
-                if type(ov) is DictType and 'title' in ov and ov['title'] == v['title']:
+                if isinstance(ov, dict) and 'title' in ov and ov['title'] == v['title']:
                     oldv = ov
                     continue
 
@@ -517,13 +517,13 @@ def update_cache_info(jso, oldjso):
         return
 
     for m in jso:
-        if type(m) is DictType and m['type'] == 'machine':
+        if isinstance(m, dict) and m['type'] == 'machine':
             print("  "+m['title']+"...")
 
             # find matching machine in oldjso
             oldm = None
             for om in oldjso:
-                if type(om) is DictType and om['type'] == 'machine' and 'title' in om and om['title'] == m['title']:
+                if isinstance(om, dict) and om['type'] == 'machine' and 'title' in om and om['title'] == m['title']:
                     oldm = om
                     continue
 

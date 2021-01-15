@@ -224,7 +224,7 @@ def gen_assembly_guide(m, guide_template):
 
     # machine views
     for c in m['children']:
-        if type(c) is DictType and c['type'] == 'view' and 'filepath' in c:
+        if isinstance(c, dict) and c['type'] == 'view' and 'filepath' in c:
             view = c
             md += '!['+view['caption']+']('+ view['filepath'][3:] +')\n\n'
 
@@ -469,7 +469,7 @@ def gen_index(jso, index_file, index_template):
     # build object
     indexObj = { 'machines': [], 'project':'' };
     for m in jso:
-        if type(m) is DictType and m['type'] == 'machine':
+        if isinstance(m, dict) and m['type'] == 'machine':
 
             # tack in a view filename
             m['viewFilename'] = views.view_filename(m['title'] + '_view')
@@ -527,7 +527,7 @@ def guides():
 
     # for each machine
     for m in jso:
-        if type(m) is DictType and m['type'] == 'machine':
+        if isinstance(m, dict) and m['type'] == 'machine':
 
             if 'guides' not in m:
                 m['guides'] = []

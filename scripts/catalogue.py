@@ -36,7 +36,7 @@ def output_vitamin(v):
 
         # per view
         for view in t['children']:
-            if type(view) is DictType and view['type'] == 'view':
+            if isinstance(view, dict) and view['type'] == 'view':
                 md += '!['+t['title']+']('+view['png_name']+')\n'
 
     md += '\n'
@@ -84,7 +84,7 @@ def compile_vitamin(v, dom):
         # Views
         print("    Views")
         for view in v['children']:
-            if type(view) is DictType and view['type'] == 'view':
+            if isinstance(view, dict) and view['type'] == 'view':
                 print("      "+view['title'])
 
                 render_view(v['title'], v['call'], config.paths['vitaminsimages'], view, hashchanged, h, [fn], False, useVitaminSTL=False)
@@ -230,7 +230,7 @@ def catalogue():
         dom = {'vitamins':[]}
 
         for v in jso:
-            if type(v) is DictType and v['type'] == 'vitamin':
+            if isinstance(v, dict) and v['type'] == 'vitamin':
                 try:
                     compile_vitamin(v, dom)
                 except Exception as e:

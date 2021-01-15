@@ -33,7 +33,7 @@ def cut():
 
     # for each machine
     for m in jso:
-        if type(m) is DictType and m['type'] == 'machine':
+        if isinstance(m, dict) and m['type'] == 'machine':
             print(m['title'])
 
             al = m['cut']

@@ -74,7 +74,7 @@ def vitamins():
 
     # for each machine
     for m in jso:
-        if type(m) is DictType and m['type'] == 'machine':
+        if isinstanc(m, dict) and m['type'] == 'machine':
             print(m['title'])
 
             vl = m['vitamins']

@@ -57,7 +57,7 @@ def animateAssembly(mname, aname, prefix, framesPerStep):
 
     # locate required machine
     for m in jso:
-        if type(m) is DictType and m['type'] == 'machine' and m['title'] == mname:
+        if isinstance(m, dict) and m['type'] == 'machine' and m['title'] == mname:
             print("Found machine: "+m['title'])
 
             al = m['assemblies']
