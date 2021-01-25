@@ -359,9 +359,8 @@ def load_sources():
 
 def load_source(csvfn):
     if os.path.isfile(csvfn):
-        #with open(csvfn, 'rb') as csvfile:
-        with open(csvfn, 'r') as csvfile:
-            rdr = csv.DictReader(csvfile)
+        with open(csvfn, 'r', newline='') as csvfile:
+            rdr = csv.dictreader(csvfile, fieldnames=('vitamin','cost','notes','source'))
             for row in rdr:
                 vn = row['Vitamin']
                 if vn not in sourcing:
